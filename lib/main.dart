@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tap2024/screens/home_screen.dart';
 import 'package:tap2024/screens/intenciones_screen.dart';
 import 'package:tap2024/screens/login_screen_2.dart';
+import 'package:tap2024/screens/movie_detail_screen.dart';
 import 'package:tap2024/screens/popular_screen.dart';
+import 'package:tap2024/screens/register_screen.dart';
 import 'package:tap2024/screens/splash_screen.dart';
 import 'package:tap2024/settings/theme_settings.dart';
 import 'package:tap2024/settings/value_listener.dart';
@@ -19,14 +21,16 @@ class MyApp extends StatelessWidget {
       builder: (context,value,child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: PopularScreen(),
+          home: RegisterScreen(),
           theme: value 
           ? ThemeSettings.darkTheme(context) 
           : ThemeSettings.lightTheme(context),
           routes: {
             "/home":(context) => HomeScreen(),
             "/login2":(context) => LoginScreen2(),
-            "/intent":(context) => IntencionesScreen()
+            "/intent":(context) => IntencionesScreen(),
+            "/register":(context) => RegisterScreen(),
+            "/detail":(context) => MovieDetailScreen()
           },
         );
       }

@@ -47,6 +47,14 @@ class HomeScreen extends StatelessWidget {
                 trailing: Icon(Icons.chevron_right),
                 onTap: ()=>Navigator.pushNamed(context, '/intent'),
               ),
+              ListTile(
+                tileColor: Color.fromARGB(255, 134, 10, 250),
+                title: Text('Registrar'),
+                subtitle: Text('Practica 7'),
+                leading: Icon(Icons.abc),
+                trailing: Icon(Icons.chevron_right),
+                onTap: ()=>Navigator.pushNamed(context, '/register'),
+              ),
               DayNightSwitcher(
                 isDarkModeEnabled: ValueListener.isDark.value, 
                 onStateChanged: (isDarkModeEnabled) {

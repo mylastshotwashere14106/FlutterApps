@@ -29,7 +29,8 @@ class _PopularScreenState extends State<PopularScreen> {
         future: apiPopular!.getAllPopular(),
         builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 10,),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) => PopularView(popularModel:snapshot.data![index]),
             );
