@@ -21,6 +21,7 @@ class _RegisterScreen extends State<RegisterScreen> {
     }
     return null;
   }
+
   String? validatePhone(String? phone){
     RegExp phoneRegex =RegExp(r'^(?:[+0]9)?[0-9]{10,15}$');
     final isPhoneValid = phoneRegex.hasMatch(phone ?? '');
@@ -29,6 +30,19 @@ class _RegisterScreen extends State<RegisterScreen> {
     }
     return null;
   }
+
+  String? hasValidUrl(String? value) {
+   String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
+   RegExp regExp = new RegExp(pattern);
+
+   if (value?.length == 0) {
+        return 'Please enter url';
+   }
+   else if (!regExp.hasMatch(value!)) {
+     return 'Please enter valid url';
+   }
+   return null;
+  }  
 
 
   bool agreePersonalData = true;
@@ -166,12 +180,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                         height: 25.0,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Por favor ingresa tu github';
-                          }
-                          return null;
-                        },
+                        validator: hasValidUrl,
                         decoration: InputDecoration(
                           label: const Text('Github'),
                           hintText: 'Ingresa github',
