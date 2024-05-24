@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tap2024/screens/login_screen.dart';
 import 'package:tap2024/settings/custom_scaffold.dart';
+import 'package:tap2024/settings/utils.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,38 +17,54 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreen extends State<RegisterScreen> {
   final _formSignupKey = GlobalKey<FormState>();
 
-  String? validateEmail(String? email){
-    RegExp emailRegex =RegExp(r'^[\w\.-]+@[\w-]+\.\w{2,3}(\.\w{2,3})?$');
+  String? validateEmail(String? email) {
+    RegExp emailRegex = RegExp(r'^[\w\.-]+@[\w-]+\.\w{2,3}(\.\w{2,3})?$');
     final isEmailValid = emailRegex.hasMatch(email ?? '');
-    if(!isEmailValid){
-      return  'Por favor ingresa un email valido';
+    if (!isEmailValid) {
+      return 'Por favor ingresa un email valido';
     }
     return null;
   }
 
-  String? validatePhone(String? phone){
-    RegExp phoneRegex =RegExp(r'^(?:[+0]9)?[0-9]{10,15}$');
+  String? validatePhone(String? phone) {
+    RegExp phoneRegex = RegExp(r'^(?:[+0]9)?[0-9]{10,15}$');
     final isPhoneValid = phoneRegex.hasMatch(phone ?? '');
-    if(!isPhoneValid){
-      return  'Por favor ingresa un número de telefono valido';
+    if (!isPhoneValid) {
+      return 'Por favor ingresa un número de telefono valido';
     }
     return null;
   }
 
-  String? hasValidUrl(String? value) {
-   String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
-   RegExp regExp = new RegExp(pattern);
+  String? hasValidUrl(String? url) {
+    String pattern =
+        r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
+    RegExp regExp = new RegExp(pattern);
 
-   if (value?.length == 0) {
-        return 'Please enter url';
-   }
-   else if (!regExp.hasMatch(value!)) {
-     return 'Please enter valid url';
-   }
-   return null;
-  }  
+    if (url?.length == 0) {
+      return 'Por favor ingresa url';
+    } else if (!regExp.hasMatch(url!)) {
+      return 'Por favor ingresa una url valida';
+    }
+    return null;
+  }
 
+  String? validatePassword(String? value) {
+    RegExp regex = RegExp(
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!.,@#\$&*~]).{6,}$');
+    if (value!.isEmpty) {
+      return 'Por favor ingresa contraseña';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Ingresa contraseña valida\n';
+      } else {
+        return null;
+      }
+    }
+  }
 
+  Uint8List? _image;
+  File? selectedIMage;
+  
   bool agreePersonalData = true;
   @override
   Widget build(BuildContext context) {
@@ -84,6 +104,33 @@ class _RegisterScreen extends State<RegisterScreen> {
                           color: Colors.deepPurpleAccent,
                         ),
                       ),
+                      SizedBox(height: 40.0),
+                      Stack(
+                        children: [
+                            _image != null ?
+                         CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(_image!),
+                        )
+                        :
+                        const CircleAvatar(
+                        radius: 64,
+                        backgroundImage: NetworkImage(
+                            'https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-1024.png'),
+                      ),
+                      Positioned(
+                          bottom: -0,
+                      left: 80,
+                          child: IconButton(
+                        onPressed: (){showImagePickerOption(context); },
+                        icon: Icon(Icons.add_a_photo),
+                      ),
+                      ),
+                        ]
+                        
+                      
+                      ),
+                      
                       const SizedBox(
                         height: 40.0,
                       ),
@@ -95,9 +142,9 @@ class _RegisterScreen extends State<RegisterScreen> {
                           }
                           return null;
                         },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           label: const Text('Nombre completo'),
-                          
                           hintText: 'Ingresar nombre completo',
                           hintStyle: const TextStyle(
                             color: Colors.black26,
@@ -122,7 +169,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                       // email
                       TextFormField(
                         validator: validateEmail,
-                        
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           label: const Text('Email'),
                           hintText: 'Ingresa Email',
@@ -148,14 +195,11 @@ class _RegisterScreen extends State<RegisterScreen> {
                       ),
                       // password
                       TextFormField(
-                        obscureText: true,
-                        obscuringCharacter: '*',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Por favor ingresar contraseña';
-                          }
-                          return null;
-                        },
+                        //obscureText: true,
+                        //obscuringCharacter: '*',
+                        validator: validatePassword,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        maxLength: 15,
                         decoration: InputDecoration(
                           label: const Text('Contraseña'),
                           hintText: 'Ingresar contraseña',
@@ -181,6 +225,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                       ),
                       TextFormField(
                         validator: hasValidUrl,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           label: const Text('Github'),
                           hintText: 'Ingresa github',
@@ -201,10 +246,13 @@ class _RegisterScreen extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(
+                        height: 25,
+                      ),
                       //telefono
                       TextFormField(
-                        validator:validatePhone,
+                        validator: validatePhone,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         maxLength: 10,
                         decoration: InputDecoration(
                           label: const Text('Teléfono'),
@@ -226,7 +274,9 @@ class _RegisterScreen extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(
+                        height: 25,
+                      ),
                       // i agree to the processing
                       Row(
                         children: [
@@ -317,7 +367,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                         height: 30.0,
                       ),
                       // sign up social media logo
-                     /* Row(
+                      /* Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Logo(Logos.facebook_f),
@@ -371,4 +421,82 @@ class _RegisterScreen extends State<RegisterScreen> {
       ),
     );
   }
+  void showImagePickerOption(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.blue[100],
+        context: context,
+        builder: (builder) {
+          return Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4.5,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromGallery();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.image,
+                              size: 70,
+                            ),
+                            Text("Gallery")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromCamera();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 70,
+                            ),
+                            Text("Camera")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Future _pickImageFromGallery() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (returnImage == null) return;
+    setState(() {
+      selectedIMage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+    });
+    Navigator.of(context).pop(); //close the model sheet
+  }
+
+//Camera
+  Future _pickImageFromCamera() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (returnImage == null) return;
+    setState(() {
+      selectedIMage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+    });
+    Navigator.of(context).pop();
+  }
+
 }

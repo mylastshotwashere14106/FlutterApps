@@ -9,6 +9,7 @@ import 'package:tap2024/screens/splash_screen.dart';
 import 'package:tap2024/settings/theme_settings.dart';
 import 'package:tap2024/settings/value_listener.dart';
 
+
 void main() => runApp(const MyApp()); 
 
 class MyApp extends StatelessWidget {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       builder: (context,value,child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: RegisterScreen(),
+          home: const SplashScreen(),
           theme: value 
           ? ThemeSettings.darkTheme(context) 
           : ThemeSettings.lightTheme(context),
