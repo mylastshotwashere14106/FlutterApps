@@ -19,15 +19,15 @@ class SplashScreenStateState extends State<SplashScreen> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.white,
-            Colors.blue
+            Colors.red,
+            Colors.redAccent
           ]),
         logo: Lottie.asset(
           'assets/logo_tecnm.json',
           height: MediaQuery.of(context).size.height*.5
           ),
         done: Done(const LoginScreen()),
-        duration: const Duration(seconds: 6),
+        duration: const Duration(seconds: 3),
         bottomLoading: true,
         ),
     );

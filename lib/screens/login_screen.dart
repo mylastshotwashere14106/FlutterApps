@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final txtUser = TextFormField(
       decoration: InputDecoration(
-          hintText: 'Correo Electrónico',
+          hintText: 'Correo',
           hintStyle: TextStyle(fontWeight: FontWeight.bold)),
     );
 
@@ -35,11 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
           image: DecorationImage(
               opacity: .5,
               fit: BoxFit.fill,
-              image: AssetImage('assets/goku.jpg'))),
+              image: AssetImage('assets/purple.jpg'))),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          Positioned(top: 100, child: Image.asset('assets/db.png', width: 200)),
+          //Positioned(top: 100, child: Image.asset('assets/lone.png', width: 200)),
           Positioned(
             bottom: 150,
             child: Container(
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 130,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(111, 65, 158, 67),
+                  color: Color.fromARGB(111, 255, 0, 70),
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 children: [txtUser, txtPwd],
@@ -58,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
               bottom: 90,
               child: ElevatedButton.icon(
                 onPressed: () {},
-                label: const Text('Validar Usuario'),
-                icon: const Icon(Icons.login),
+                label: const Text('Registro Usuario'),
+                icon: const Icon(Icons.logo_dev),
               )),
           Positioned(
               bottom: 90,

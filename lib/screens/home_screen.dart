@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Topicos Avanzados'),),
+      appBar: AppBar(title: const Text('TAP'),),
       drawer: menuLateral(context),
     );
   }
@@ -23,34 +23,20 @@ class HomeScreen extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     
-                    image: AssetImage('assets/goku.jpg'))
+                    image: AssetImage('assets/purple.jpg'))
                 ),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage('https://pbs.twimg.com/media/FcgoxL2XEAAGbCK?format=jpg&name=large'),
+                  backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/1/14/Wikipe-tan_holding_Russian_Libertarian_flag.png'),
                 ),
-                accountName: Text('Saga'), 
-                accountEmail: Text('21030159@itcelaya.edu.mx')
+                //https://upload.wikimedia.org/wikipedia/commons/1/14/Wikipe-tan_holding_Russian_Libertarian_flag.png
+                  //https://pbs.twimg.com/media/FcgoxL2XEAAGbCK?format=jpg&name=large
+                accountName: Text('Angel'),
+                accountEmail: Text('21030374@itcelaya.edu.mx')
                 ),
-              ListTile(
-                tileColor: Color.fromARGB(255, 134, 10, 250),
-                title: Text('Login'),
-                subtitle: Text('Direccion de youtube'),
-                leading: Icon(Icons.key),
-                trailing: Icon(Icons.chevron_right),
-                onTap: ()=>Navigator.pushNamed(context, '/login2'),
-              ),
-              ListTile(
-                tileColor: Color.fromARGB(255, 134, 10, 250),
-                title: Text('Intenciones'),
-                subtitle: Text('Acciones implicitas'),
-                leading: Icon(Icons.abc),
-                trailing: Icon(Icons.chevron_right),
-                onTap: ()=>Navigator.pushNamed(context, '/intent'),
-              ),
               ListTile(
                 tileColor: Color.fromARGB(255, 134, 10, 250),
                 title: Text('Registrar'),
-                subtitle: Text('Practica 7'),
+                subtitle: Text(''),
                 leading: Icon(Icons.abc),
                 trailing: Icon(Icons.chevron_right),
                 onTap: ()=>Navigator.pushNamed(context, '/register'),

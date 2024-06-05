@@ -21,7 +21,7 @@ class _RegisterScreen extends State<RegisterScreen> {
     RegExp emailRegex = RegExp(r'^[\w\.-]+@[\w-]+\.\w{2,3}(\.\w{2,3})?$');
     final isEmailValid = emailRegex.hasMatch(email ?? '');
     if (!isEmailValid) {
-      return 'Por favor ingresa un email valido';
+      return 'Ingresa un email valido';
     }
     return null;
   }
@@ -30,7 +30,7 @@ class _RegisterScreen extends State<RegisterScreen> {
     RegExp phoneRegex = RegExp(r'^(?:[+0]9)?[0-9]{10,15}$');
     final isPhoneValid = phoneRegex.hasMatch(phone ?? '');
     if (!isPhoneValid) {
-      return 'Por favor ingresa un número de telefono valido';
+      return 'Ingresa un número de telefono valido';
     }
     return null;
   }
@@ -41,9 +41,9 @@ class _RegisterScreen extends State<RegisterScreen> {
     RegExp regExp = new RegExp(pattern);
 
     if (url?.length == 0) {
-      return 'Por favor ingresa url';
+      return 'Ingresa url';
     } else if (!regExp.hasMatch(url!)) {
-      return 'Por favor ingresa una url valida';
+      return 'Ingresa una url valida';
     }
     return null;
   }
@@ -52,7 +52,7 @@ class _RegisterScreen extends State<RegisterScreen> {
     RegExp regex = RegExp(
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!.,@#\$&*~]).{6,}$');
     if (value!.isEmpty) {
-      return 'Por favor ingresa contraseña';
+      return 'Ingresa contraseña';
     } else {
       if (!regex.hasMatch(value)) {
         return 'Ingresa contraseña valida\n';
@@ -80,12 +80,12 @@ class _RegisterScreen extends State<RegisterScreen> {
           Expanded(
             flex: 7,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(25.0, 50.0, 25.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
                 ),
               ),
               child: SingleChildScrollView(
@@ -99,9 +99,9 @@ class _RegisterScreen extends State<RegisterScreen> {
                       Text(
                         'Registro',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.w900,
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.blue,
                         ),
                       ),
                       SizedBox(height: 40.0),
@@ -118,12 +118,14 @@ class _RegisterScreen extends State<RegisterScreen> {
                         backgroundImage: NetworkImage(
                             'https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-1024.png'),
                       ),
+                        //https://i.pinimg.com/736x/b1/2c/41/b12c41b49b61d4405121275ae7a8e168.jpg
+                          //https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-1024.png
                       Positioned(
                           bottom: -0,
                       left: 80,
                           child: IconButton(
                         onPressed: (){showImagePickerOption(context); },
-                        icon: Icon(Icons.add_a_photo),
+                        icon: Icon(Icons.photo),
                       ),
                       ),
                         ]
@@ -138,28 +140,28 @@ class _RegisterScreen extends State<RegisterScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Porfavor ingresa nombre completo';
+                            return 'Ingresa nombre';
                           }
                           return null;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          label: const Text('Nombre completo'),
-                          hintText: 'Ingresar nombre completo',
+                          label: const Text('Nombre'),
+                          hintText: 'Ingresar nombre',
                           hintStyle: const TextStyle(
-                            color: Colors.black26,
+                            color: Colors.blue,
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -171,22 +173,22 @@ class _RegisterScreen extends State<RegisterScreen> {
                         validator: validateEmail,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          label: const Text('Email'),
-                          hintText: 'Ingresa Email',
+                          label: const Text('Correo'),
+                          hintText: 'Ingresa correo',
                           hintStyle: const TextStyle(
-                            color: Colors.black26,
+                            color: Colors.blue,
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -204,19 +206,19 @@ class _RegisterScreen extends State<RegisterScreen> {
                           label: const Text('Contraseña'),
                           hintText: 'Ingresar contraseña',
                           hintStyle: const TextStyle(
-                            color: Colors.black26,
+                            color: Colors.blue,
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -227,22 +229,22 @@ class _RegisterScreen extends State<RegisterScreen> {
                         validator: hasValidUrl,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          label: const Text('Github'),
-                          hintText: 'Ingresa github',
+                          label: const Text('Cuenta GitHub'),
+                          hintText: 'Ingresa cuenta GitHub',
                           hintStyle: const TextStyle(
-                            color: Colors.black26,
+                            color: Colors.blue,
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -255,22 +257,22 @@ class _RegisterScreen extends State<RegisterScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         maxLength: 10,
                         decoration: InputDecoration(
-                          label: const Text('Teléfono'),
-                          hintText: 'Ingresa Teléfono',
+                          label: const Text('Celular'),
+                          hintText: 'Ingresa celular',
                           hintStyle: const TextStyle(
-                            color: Colors.black26,
+                            color: Colors.blue,
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
+                              color: Colors.blue, // Default border color
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -290,13 +292,13 @@ class _RegisterScreen extends State<RegisterScreen> {
                             activeColor: Colors.deepPurple,
                           ),
                           const Text(
-                            'Acepto el uso de mis ',
+                            'Acepto el uso de mi ',
                             style: TextStyle(
                               color: Colors.black45,
                             ),
                           ),
                           Text(
-                            ' datos personales',
+                            ' informacion personal',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.deepPurple,
@@ -323,7 +325,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
-                                        'Por favor acepta el tratamiento de datos personales')),
+                                        'Por favor acepta el uso de informacion personal')),
                               );
                             }
                           },
@@ -351,14 +353,14 @@ class _RegisterScreen extends State<RegisterScreen> {
                             child: Text(
                               'Sign up with',
                               style: TextStyle(
-                                color: Colors.black45,
+                                color: Colors.blue,
                               ),
                             ),
                           ),
                           Expanded(
                             child: Divider(
                               thickness: 0.7,
-                              color: Colors.grey.withOpacity(0.5),
+                              color: Colors.blue.withOpacity(0.5),
                             ),
                           ),
                         ],
